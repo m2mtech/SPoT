@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TagTVC : UITableViewController
+@interface FlickrPhotoTagTVC : UITableViewController
 
 @end

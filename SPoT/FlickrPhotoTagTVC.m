@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 m2m server software gmbh. All rights reserved.
 //
 
-#import "TagTVC.h"
+#import "FlickrPhotoTagTVC.h"
 #import "FlickrFetcher.h"
 
-@interface TagTVC ()
+@interface FlickrPhotoTagTVC ()
 
 @property (nonatomic, strong) NSArray *photos; // of NSDictionary
 @property (nonatomic, strong) NSDictionary *photosByTag; // of NSArray of NSDictionary
 
 @end
 
-@implementation TagTVC
+@implementation FlickrPhotoTagTVC
 
 - (void)updatePhotosByTag
 {
@@ -52,6 +52,23 @@
     self.photos = [FlickrFetcher stanfordPhotos];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        if (indexPath) {
+            if ([segue.identifier isEqualToString:@"Show Photos"]) {
+                if ([segue.destinationViewController respondsToSelector:@selector(setPhotos:)]) {
+                    NSString *tag = [self tagForRow:indexPath.row];
+                    [segue.destinationViewController performSelector:@selector(setPhotos:)
+                                                          withObject:self.photosByTag[tag]];
+                    [segue.destinationViewController setTitle:[tag capitalizedString]];
+                }
+            }
+        }
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -64,12 +81,17 @@
     return [self.photosByTag count];
 }
 
+- (NSString *)tagForRow:(NSUInteger)row
+{
+    return [[self.photosByTag allKeys] objectAtIndex:row];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Tag Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    NSString *tag = [[self.photosByTag allKeys] objectAtIndex:indexPath.row];
+    NSString *tag = [self tagForRow:indexPath.row];
     int photoCount = [self.photosByTag[tag] count];
     cell.textLabel.text = [tag capitalizedString];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photo%@", photoCount, photoCount > 1 ? @"s" : @""];
