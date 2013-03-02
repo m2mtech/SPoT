@@ -26,7 +26,7 @@
             if ([tag isEqualToString:@"cs193pspot"]) continue;
             if ([tag isEqualToString:@"portrait"]) continue;
             if ([tag isEqualToString:@"landscape"]) continue;
-            NSMutableArray *photos = [photosByTag objectForKey:tag];
+            NSMutableArray *photos = photosByTag[tag];
             if (!photos) {
                 photos = [NSMutableArray array];
                 photosByTag[tag] = photos;
@@ -83,7 +83,7 @@
 
 - (NSString *)tagForRow:(NSUInteger)row
 {
-    return [[self.photosByTag allKeys] objectAtIndex:row];
+    return [self.photosByTag allKeys][row];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
