@@ -63,4 +63,13 @@
     [self resetImage];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    double wScale = self.scrollView.bounds.size.width / self.imageView.image.size.width;
+    double hScale = self.scrollView.bounds.size.height / self.imageView.image.size.height;
+    if (wScale > hScale) self.scrollView.zoomScale = wScale;
+    else self.scrollView.zoomScale = hScale;
+}
+
 @end
