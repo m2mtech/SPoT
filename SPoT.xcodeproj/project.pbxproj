@@ -19,6 +19,7 @@
 		5B70087A16E2539800553AC2 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B70087816E2539800553AC2 /* MainStoryboard_iPhone.storyboard */; };
 		5B70087D16E2539800553AC2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B70087B16E2539800553AC2 /* MainStoryboard_iPad.storyboard */; };
 		5B70088016E2539800553AC2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B70087F16E2539800553AC2 /* ViewController.m */; };
+		5B70088A16E2544500553AC2 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B70088916E2544500553AC2 /* FlickrFetcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,10 @@
 		5B70087C16E2539800553AC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		5B70087E16E2539800553AC2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		5B70087F16E2539800553AC2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5B70088716E2544400553AC2 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
+		5B70088816E2544500553AC2 /* FlickrFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrFetcher.h; sourceTree = "<group>"; };
+		5B70088916E2544500553AC2 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFetcher.m; sourceTree = "<group>"; };
+		5B70088B16E254A900553AC2 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 		5B70085416E2539700553AC2 = {
 			isa = PBXGroup;
 			children = (
+				5B70088B16E254A900553AC2 /* README */,
 				5B70086616E2539800553AC2 /* SPoT */,
 				5B70085F16E2539700553AC2 /* Frameworks */,
 				5B70085E16E2539700553AC2 /* Products */,
@@ -85,12 +91,11 @@
 		5B70086616E2539800553AC2 /* SPoT */ = {
 			isa = PBXGroup;
 			children = (
-				5B70086F16E2539800553AC2 /* AppDelegate.h */,
-				5B70087016E2539800553AC2 /* AppDelegate.m */,
 				5B70087816E2539800553AC2 /* MainStoryboard_iPhone.storyboard */,
 				5B70087B16E2539800553AC2 /* MainStoryboard_iPad.storyboard */,
 				5B70087E16E2539800553AC2 /* ViewController.h */,
 				5B70087F16E2539800553AC2 /* ViewController.m */,
+				5B70088616E2544400553AC2 /* FlickrFetcher */,
 				5B70086716E2539800553AC2 /* Supporting Files */,
 			);
 			path = SPoT;
@@ -99,6 +104,8 @@
 		5B70086716E2539800553AC2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B70086F16E2539800553AC2 /* AppDelegate.h */,
+				5B70087016E2539800553AC2 /* AppDelegate.m */,
 				5B70086816E2539800553AC2 /* SPoT-Info.plist */,
 				5B70086916E2539800553AC2 /* InfoPlist.strings */,
 				5B70086C16E2539800553AC2 /* main.m */,
@@ -108,6 +115,16 @@
 				5B70087616E2539800553AC2 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5B70088616E2544400553AC2 /* FlickrFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				5B70088716E2544400553AC2 /* FlickrAPIKey.h */,
+				5B70088816E2544500553AC2 /* FlickrFetcher.h */,
+				5B70088916E2544500553AC2 /* FlickrFetcher.m */,
+			);
+			path = FlickrFetcher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +197,7 @@
 				5B70086D16E2539800553AC2 /* main.m in Sources */,
 				5B70087116E2539800553AC2 /* AppDelegate.m in Sources */,
 				5B70088016E2539800553AC2 /* ViewController.m in Sources */,
+				5B70088A16E2544500553AC2 /* FlickrFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +256,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -263,7 +281,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
