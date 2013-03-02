@@ -18,7 +18,7 @@
 
 - (void)setPhotos:(NSArray *)photos
 {
-    _photos = photos;
+    _photos = [photos sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:FLICKR_PHOTO_TITLE ascending:YES]]];
     [self.tableView reloadData];
 }
 

@@ -83,7 +83,7 @@
 
 - (NSString *)tagForRow:(NSUInteger)row
 {
-    return [self.photosByTag allKeys][row];
+    return [[self.photosByTag allKeys] sortedArrayUsingSelector:@selector(compare:)][row];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
