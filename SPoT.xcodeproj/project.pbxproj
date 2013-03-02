@@ -22,6 +22,7 @@
 		5B70088A16E2544500553AC2 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B70088916E2544500553AC2 /* FlickrFetcher.m */; };
 		5B70088E16E262A100553AC2 /* FlickrPhotoTagTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B70088D16E262A100553AC2 /* FlickrPhotoTagTVC.m */; };
 		5B70089116E2749A00553AC2 /* FlickrPhotoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B70089016E2749A00553AC2 /* FlickrPhotoTVC.m */; };
+		5B70089416E27EBA00553AC2 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B70089316E27EBA00553AC2 /* ImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		5B70088D16E262A100553AC2 /* FlickrPhotoTagTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoTagTVC.m; sourceTree = "<group>"; };
 		5B70088F16E2749A00553AC2 /* FlickrPhotoTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotoTVC.h; sourceTree = "<group>"; };
 		5B70089016E2749A00553AC2 /* FlickrPhotoTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoTVC.m; sourceTree = "<group>"; };
+		5B70089216E27EBA00553AC2 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		5B70089316E27EBA00553AC2 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				5B70088D16E262A100553AC2 /* FlickrPhotoTagTVC.m */,
 				5B70088F16E2749A00553AC2 /* FlickrPhotoTVC.h */,
 				5B70089016E2749A00553AC2 /* FlickrPhotoTVC.m */,
+				5B70089216E27EBA00553AC2 /* ImageViewController.h */,
+				5B70089316E27EBA00553AC2 /* ImageViewController.m */,
 				5B70088616E2544400553AC2 /* FlickrFetcher */,
 				5B70086716E2539800553AC2 /* Supporting Files */,
 			);
@@ -210,6 +215,7 @@
 				5B70088A16E2544500553AC2 /* FlickrFetcher.m in Sources */,
 				5B70088E16E262A100553AC2 /* FlickrPhotoTagTVC.m in Sources */,
 				5B70089116E2749A00553AC2 /* FlickrPhotoTVC.m in Sources */,
+				5B70089416E27EBA00553AC2 /* ImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
