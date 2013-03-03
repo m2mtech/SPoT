@@ -22,18 +22,24 @@
     [self.tableView reloadData];
 }
 
+- (void)sendDataforIndexPath:(NSIndexPath *)indexPath toViewController:(UIViewController *)vc
+{
+    if ([vc respondsToSelector:@selector(setImageURL:)]) {
+        [RecentFlickrPhotos addPhoto:self.photos[indexPath.row]];
+        NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row] format:FlickrPhotoFormatLarge];
+        [vc performSelector:@selector(setImageURL:) withObject:url];
+        [vc setTitle:[self titleForRow:indexPath.row]];
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Image"]) {
-                if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
-                    [RecentFlickrPhotos addPhoto:self.photos[indexPath.row]];
-                    NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row] format:FlickrPhotoFormatLarge];
-                    [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
-                    [segue.destinationViewController setTitle:[self titleForRow:indexPath.row]];
-                }
+                [self sendDataforIndexPath:indexPath
+                          toViewController:segue.destinationViewController];
             }
         }
     }
@@ -66,5 +72,13 @@
     
     return cell;
 }
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self sendDataforIndexPath:indexPath
+              toViewController:[self.splitViewController.viewControllers lastObject]];
+}
+
 
 @end
