@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B3CAE7616E4C2B000EE7CEA /* NetworkActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3CAE7516E4C2B000EE7CEA /* NetworkActivityIndicator.m */; };
 		5B70086116E2539700553AC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B70086016E2539700553AC2 /* UIKit.framework */; };
 		5B70086316E2539800553AC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B70086216E2539700553AC2 /* Foundation.framework */; };
 		5B70086516E2539800553AC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B70086416E2539800553AC2 /* CoreGraphics.framework */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B3CAE7416E4C2B000EE7CEA /* NetworkActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkActivityIndicator.h; sourceTree = "<group>"; };
+		5B3CAE7516E4C2B000EE7CEA /* NetworkActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkActivityIndicator.m; sourceTree = "<group>"; };
 		5B70085D16E2539700553AC2 /* SPoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B70086016E2539700553AC2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5B70086216E2539700553AC2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -118,6 +121,8 @@
 				5B70089616E2894400553AC2 /* RecentFlickrPhotoTVC.m */,
 				5B70089216E27EBA00553AC2 /* ImageViewController.h */,
 				5B70089316E27EBA00553AC2 /* ImageViewController.m */,
+				5B3CAE7416E4C2B000EE7CEA /* NetworkActivityIndicator.h */,
+				5B3CAE7516E4C2B000EE7CEA /* NetworkActivityIndicator.m */,
 				5B70088616E2544400553AC2 /* FlickrFetcher */,
 				5B70086716E2539800553AC2 /* Supporting Files */,
 			);
@@ -228,6 +233,7 @@
 				5B70089416E27EBA00553AC2 /* ImageViewController.m in Sources */,
 				5B70089716E2894400553AC2 /* RecentFlickrPhotoTVC.m in Sources */,
 				5BA6582C16E28BE200D5FC62 /* RecentFlickrPhotos.m in Sources */,
+				5B3CAE7616E4C2B000EE7CEA /* NetworkActivityIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

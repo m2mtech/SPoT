@@ -8,6 +8,7 @@
 
 #import "FlickrPhotoTagTVC.h"
 #import "FlickrFetcher.h"
+#import "NetworkActivityIndicator.h"
 
 @interface FlickrPhotoTagTVC ()
 
@@ -52,8 +53,10 @@
     
     dispatch_queue_t queue = dispatch_queue_create("Flickr Downloader", NULL);
     dispatch_async(queue, ^{
-        //[NSThread sleepForTimeInterval:2.0];
+        [NetworkActivityIndicator start];
+        //[NSThread sleepForTimeInterval:
         NSArray *photos = [FlickrFetcher stanfordPhotos];
+        [NetworkActivityIndicator stop];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.photos = photos;
         });

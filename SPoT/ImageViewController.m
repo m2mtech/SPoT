@@ -7,6 +7,7 @@
 //
 
 #import "ImageViewController.h"
+#import "NetworkActivityIndicator.h"
 
 @interface ImageViewController () <UIScrollViewDelegate,
                                    UISplitViewControllerDelegate>
@@ -16,10 +17,24 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *titleBarButtonItem;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) UIBarButtonItem *splitViewBarButtonItem;
+@property (nonatomic, strong) UIActivityIndicatorView *spinner;
 
 @end
 
 @implementation ImageViewController
+
+- (UIActivityIndicatorView *)spinner
+{
+    if (!_spinner) {
+        _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [self.view addSubview:_spinner];
+        [_spinner setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *variables = NSDictionaryOfVariableBindings(_spinner);
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_spinner]-|" options:0 metrics:nil views:variables]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_spinner]-|" options:0 metrics:nil views:variables]];
+    }
+    return _spinner;
+}
 
 - (void)setTitle:(NSString *)title
 {
@@ -39,11 +54,15 @@
         self.scrollView.contentSize = CGSizeZero;
         self.imageView.image = nil;
         
+        if (!self.imageURL) return;
+        [self.spinner startAnimating];
         NSURL *imageURL = self.imageURL;
         dispatch_queue_t queue = dispatch_queue_create("Flickr Downloader", NULL);
         dispatch_async(queue, ^{
+            [NetworkActivityIndicator start];
             //[NSThread sleepForTimeInterval:2.0];
             NSData *imageData = [[NSData alloc] initWithContentsOfURL:self.imageURL];
+            [NetworkActivityIndicator stop];
             if (imageURL == self.imageURL) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIImage *image = [[UIImage alloc] initWithData:imageData];
@@ -52,8 +71,9 @@
                         self.scrollView.contentSize = image.size;
                         self.imageView.image = image;
                         self.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-                        [self setZoomScaleToFillScreen];
+                        [self setZoomScaleToFillScreen];                        
                     }
+                    [self.spinner stopAnimating];
                 });
             }
         });
