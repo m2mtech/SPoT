@@ -45,22 +45,33 @@
     [self.tableView reloadData];
 }
 
+
+- (void)loadPhtosFromFlickr
+{
+    [self.refreshControl beginRefreshing];
+    dispatch_queue_t queue = dispatch_queue_create("Flickr Downloader", NULL);
+    dispatch_async(queue, ^{
+        [NetworkActivityIndicator start];
+        //[NSThread sleepForTimeInterval: 2.0];
+        NSArray *photos = [FlickrFetcher stanfordPhotos];
+        [NetworkActivityIndicator stop];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.photos = photos;
+            [self.refreshControl endRefreshing];
+        });
+    }); 
+}
+
 #pragma mark - Life cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    dispatch_queue_t queue = dispatch_queue_create("Flickr Downloader", NULL);
-    dispatch_async(queue, ^{
-        [NetworkActivityIndicator start];
-        //[NSThread sleepForTimeInterval:
-        NSArray *photos = [FlickrFetcher stanfordPhotos];
-        [NetworkActivityIndicator stop];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.photos = photos;
-        });
-    });
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+                            action:@selector(loadPhtosFromFlickr)
+                  forControlEvents:UIControlEventValueChanged];
+    [self loadPhtosFromFlickr];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
