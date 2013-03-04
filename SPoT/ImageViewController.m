@@ -39,15 +39,24 @@
         self.scrollView.contentSize = CGSizeZero;
         self.imageView.image = nil;
         
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:self.imageURL];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        if (image) {
-            self.scrollView.zoomScale = 1.0;
-            self.scrollView.contentSize = image.size;
-            self.imageView.image = image;
-            self.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-            [self setZoomScaleToFillScreen];
-        }
+        NSURL *imageURL = self.imageURL;
+        dispatch_queue_t queue = dispatch_queue_create("Flickr Downloader", NULL);
+        dispatch_async(queue, ^{
+            //[NSThread sleepForTimeInterval:2.0];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL:self.imageURL];
+            if (imageURL == self.imageURL) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *image = [[UIImage alloc] initWithData:imageData];
+                    if (image) {
+                        self.scrollView.zoomScale = 1.0;
+                        self.scrollView.contentSize = image.size;
+                        self.imageView.image = image;
+                        self.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+                        [self setZoomScaleToFillScreen];
+                    }
+                });
+            }
+        });
     }
 }
 

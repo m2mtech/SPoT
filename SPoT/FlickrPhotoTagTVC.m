@@ -49,7 +49,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.photos = [FlickrFetcher stanfordPhotos];
+    
+    dispatch_queue_t queue = dispatch_queue_create("Flickr Downloader", NULL);
+    dispatch_async(queue, ^{
+        //[NSThread sleepForTimeInterval:2.0];
+        NSArray *photos = [FlickrFetcher stanfordPhotos];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.photos = photos;
+        });
+    });
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
