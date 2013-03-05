@@ -113,7 +113,7 @@
     self.scrollView.minimumZoomScale = 0.2;
     self.scrollView.maximumZoomScale = 5.0;
     self.scrollView.delegate = self;
-    [self resetImage];
+    //[self resetImage];
     self.titleBarButtonItem.title = self.title;
     self.splitViewController.delegate = self;
     [self handleSplitViewBarButtonItem:self.splitViewBarButtonItem];
@@ -123,6 +123,18 @@
 {
     [super viewDidLayoutSubviews];
     [self setZoomScaleToFillScreen];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self resetImage];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.imageView.image = nil;
 }
 
 #pragma mark - Scroll view
