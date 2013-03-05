@@ -18,7 +18,10 @@
 
 - (void)setPhotos:(NSArray *)photos
 {
-    _photos = [photos sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:FLICKR_PHOTO_TITLE ascending:YES]]];
+    _photos = [photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1[FLICKR_PHOTO_TITLE] compare:obj2[FLICKR_PHOTO_TITLE]
+                                         options:NSCaseInsensitiveSearch];
+    }];
     [self.tableView reloadData];
 }
 

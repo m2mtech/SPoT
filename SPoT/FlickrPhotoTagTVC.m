@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSArray *photos; // of NSDictionary
 @property (nonatomic, strong) NSDictionary *photosByTag; // of NSArray of NSDictionary
+@property (nonatomic, strong) NSArray *tags;
 
 @end
 
@@ -36,6 +37,9 @@
         }
     }
     self.photosByTag = photosByTag;
+    self.tags = [[photosByTag allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+    }];
 }
 
 - (void)setPhotos:(NSArray *)photos
@@ -81,7 +85,7 @@
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Photos"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setPhotos:)]) {
-                    NSString *tag = [self tagForRow:indexPath.row];
+                    NSString *tag = self.tags[indexPath.row];
                     [segue.destinationViewController performSelector:@selector(setPhotos:)
                                                           withObject:self.photosByTag[tag]];
                     [segue.destinationViewController setTitle:[tag capitalizedString]];
@@ -100,12 +104,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.photosByTag count];
-}
-
-- (NSString *)tagForRow:(NSUInteger)row
-{
-    return [[self.photosByTag allKeys] sortedArrayUsingSelector:@selector(compare:)][row];
+    return [self.tags count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,7 +112,7 @@
     static NSString *CellIdentifier = @"Tag Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    NSString *tag = [self tagForRow:indexPath.row];
+    NSString *tag = self.tags[indexPath.row];
     int photoCount = [self.photosByTag[tag] count];
     cell.textLabel.text = [tag capitalizedString];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photo%@", photoCount, photoCount > 1 ? @"s" : @""];
