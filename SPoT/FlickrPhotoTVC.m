@@ -26,7 +26,8 @@
 {
     if ([vc respondsToSelector:@selector(setImageURL:)]) {
         [RecentFlickrPhotos addPhoto:self.photos[indexPath.row]];
-        NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row] format:FlickrPhotoFormatLarge];
+        NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row]
+                                         format:([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) ? FlickrPhotoFormatOriginal : FlickrPhotoFormatLarge];
         [vc performSelector:@selector(setImageURL:) withObject:url];
         [vc setTitle:[self titleForRow:indexPath.row]];
     }

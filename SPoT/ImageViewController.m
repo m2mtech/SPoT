@@ -8,6 +8,7 @@
 
 #import "ImageViewController.h"
 #import "NetworkActivityIndicator.h"
+#import "FlickrCache.h"
 
 @interface ImageViewController () <UIScrollViewDelegate,
                                    UISplitViewControllerDelegate>
@@ -59,10 +60,17 @@
         NSURL *imageURL = self.imageURL;
         dispatch_queue_t queue = dispatch_queue_create("Flickr Downloader", NULL);
         dispatch_async(queue, ^{
-            [NetworkActivityIndicator start];
-            //[NSThread sleepForTimeInterval:2.0];
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL:self.imageURL];
-            [NetworkActivityIndicator stop];
+            NSData *imageData;
+            NSURL *cachedURL = [FlickrCache cachedURLforURL:imageURL];
+            if (cachedURL) {
+                imageData = [[NSData alloc] initWithContentsOfURL:cachedURL];                
+            } else {                
+                [NetworkActivityIndicator start];
+                //[NSThread sleepForTimeInterval:2.0];
+                imageData = [[NSData alloc] initWithContentsOfURL:self.imageURL];
+                [NetworkActivityIndicator stop];
+            }
+            [FlickrCache cacheData:imageData forURL:self.imageURL];
             if (imageURL == self.imageURL) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIImage *image = [[UIImage alloc] initWithData:imageData];
